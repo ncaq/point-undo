@@ -82,6 +82,9 @@
 ;; 2006/02/27: initial version
 
 ;;; Code:
+
+(require 'cl-macs)
+
 (defvar point-undo-list nil)
 (make-variable-buffer-local 'point-undo-list)
 
@@ -101,7 +104,7 @@
 
 (defun point-undo-doit (list1 list2)
   ;; list1, list2 = {point-undo-list, point-redo-list}
-  (destructuring-bind (pt . wst)
+  (cl-destructuring-bind (pt . wst)
       (or (car (symbol-value list1)) '(nil)) ;nil-safe
     (when pt
       (set list1 (cdr (symbol-value list1)))
